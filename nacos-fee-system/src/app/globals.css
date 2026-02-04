@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+    --font-display: 'Outfit', sans-serif;
+    --color-primary: #00873E;
+    --color-background-light: #ffffff;
+    --color-background-dark: #0F172A;
+}
+
+/* Custom Utilities from user request */
+.glass-effect {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* Base Setup */
+body {
+    font-family: var(--font-display);
+}
