@@ -105,7 +105,7 @@ function LoginForm() {
                         />
                     </div>
                     <div className="text-right mt-2">
-                        <a className="text-xs font-medium text-primary hover:underline" href="https://nacos-fee-system-wadw.vercel.app/reset-password">Forgot Password?</a>
+                        <Link href="/forgot-password" className="text-xs font-medium text-primary hover:underline">Forgot Password?</Link>
                     </div>
                 </div>
 
