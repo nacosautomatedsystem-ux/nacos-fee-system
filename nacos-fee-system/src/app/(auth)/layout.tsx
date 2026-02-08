@@ -12,10 +12,10 @@ export default function AuthLayout({
                     <img
                         alt="NACOS Logo"
                         className="h-10 w-10 md:h-12 md:w-12 object-contain"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD68oC07nxdBTV5mNfJR0xfFqLzWk0r0S3lWEsfjqIHSXZtCbIvzsHwlMs7RuGz3sR-oN2l3vknXml6dky4S3KJriM1KSSSOp4kgHm4Hg1UOGUtHeuIHfwrCzEQedszJjiAY_Jik-7cVT93pQqJuOXK2bPQtfjHTZtnTK6temApUKq0N0g0OAOjR0zFhVDBgwOUKgtG_1MDKZQTu1a34Z7w_rLjbCcU_9Y5lVeKfFTJqYGa4dQYYeh63BkzcGPnuezYQvCw4NJqda0"
+                        src="/images/nacos-logo.png"
                     />
                     <div>
-                        <h1 className="font-bold text-lg md:text-xl text-primary leading-tight">SACOETEC</h1>
+                        <h1 className="font-bold text-lg md:text-xl text-primary leading-tight">NACOS</h1>
                         <p className="text-[10px] md:text-xs font-medium uppercase tracking-widest text-slate-500">NACOS Fee Clearance System</p>
                     </div>
                 </div>
@@ -31,7 +31,8 @@ export default function AuthLayout({
             </main>
 
             <footer className="py-8 px-6 text-center text-slate-500 text-sm bg-background-light">
-                <p>© 2024 SACOETEC Computing Department. All Rights Reserved.</p>
+                <p>© 2026 SACOETEC Computing Department. All Rights Reserved.</p>
+                <p>Built by <a href="uplix.vercel.app">UPLIX</a></p>
                 <div className="mt-2 flex justify-center space-x-6">
                     <a className="hover:text-primary transition-colors" href="#">Privacy Policy</a>
                     <a className="hover:text-primary transition-colors" href="#">Terms of Service</a>

@@ -112,23 +112,6 @@ function PaymentsContent() {
                 <div>
                     <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">Fee Payment & History</h2>
                 </div>
-                {student && (
-                    <div className="flex items-center gap-4">
-                        <button className="bg-white p-2.5 rounded-full shadow-sm border border-slate-200 hover:bg-slate-50 transition-colors relative">
-                            <span className="material-icons-round text-slate-500">notifications</span>
-                            <span className="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
-                        </button>
-                        <div className="flex items-center gap-3 bg-white pr-4 pl-2 py-2 rounded-full shadow-sm border border-slate-200">
-                            <div className="text-right hidden sm:block leading-tight">
-                                <p className="text-sm font-semibold text-slate-900">{student.fullName}</p>
-                                <p className="text-xs text-slate-500">{student.matricNumber}</p>
-                            </div>
-                            <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
-                                {student.fullName.charAt(0)}
-                            </div>
-                        </div>
-                    </div>
-                )}
             </header>
 
             <div className="space-y-8">
@@ -303,8 +286,8 @@ function PaymentsContent() {
             </div>
 
             <footer className="mt-12 py-8 text-center text-slate-500 text-sm border-t border-slate-200">
-                <p>© 2024 NACOS SACOETEC Chapter. All Rights Reserved.</p>
-                <p className="mt-1">Automated Fee Clearance System v2.1.0</p>
+                <p>© 2026 NACOS SACOETEC Chapter. All Rights Reserved.</p>
+                <p className="mt-1">Automated Fee Clearance System v1.0</p>
             </footer>
         </div>
     );

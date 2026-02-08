@@ -165,3 +165,14 @@ export async function countStudents(): Promise<number> {
     if (error) throw error;
     return count || 0;
 }
+
+export async function updateStudent(id: string, data: Partial<Student>): Promise<Student | null> {
+    const { data: updatedStudent, error } = await supabase.from('students')
+        .update(data)
+        .eq('id', id)
+        .select()
+        .single();
+
+    if (error) throw error;
+    return updatedStudent;
+}

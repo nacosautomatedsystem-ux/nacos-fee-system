@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function AdminSettingsPage() {
     const [activeSession, setActiveSession] = useState('2025/2026');
@@ -12,14 +12,68 @@ export default function AdminSettingsPage() {
     const [maintenanceMode, setMaintenanceMode] = useState(false);
     const [maintenanceMessage, setMaintenanceMessage] = useState('');
     const [saving, setSaving] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchSettings = async () => {
+            try {
+                const response = await fetch('/api/admin/settings');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.active_session) setActiveSession(data.active_session);
+                    if (data.active_semester) setActiveSemester(data.active_semester);
+                    if (data.late_payment_window !== undefined) setLatePaymentWindow(data.late_payment_window);
+                    if (data.fee_confirmation_email !== undefined) setFeeConfirmationEmail(data.fee_confirmation_email);
+                    if (data.payment_deadline_sms !== undefined) setPaymentDeadlineSMS(data.payment_deadline_sms);
+                    if (data.admin_audit_alerts !== undefined) setAdminAuditAlerts(data.admin_audit_alerts);
+                    if (data.maintenance_mode !== undefined) setMaintenanceMode(data.maintenance_mode);
+                    if (data.maintenance_message) setMaintenanceMessage(data.maintenance_message);
+                }
+            } catch (error) {
+                console.error('Failed to fetch settings:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchSettings();
+    }, []);
 
     const handleSaveAll = async () => {
         setSaving(true);
-        // Simulate save operation
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        setSaving(false);
-        alert('Settings saved successfully!');
+        try {
+            const settings = {
+                active_session: activeSession,
+                active_semester: activeSemester,
+                late_payment_window: latePaymentWindow,
+                fee_confirmation_email: feeConfirmationEmail,
+                payment_deadline_sms: paymentDeadlineSMS,
+                admin_audit_alerts: adminAuditAlerts,
+                maintenance_mode: maintenanceMode,
+                maintenance_message: maintenanceMessage,
+            };
+
+            const response = await fetch('/api/admin/settings', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(settings),
+            });
+
+            if (response.ok) {
+                alert('Settings saved successfully!');
+            } else {
+                alert('Failed to save settings.');
+            }
+        } catch (error) {
+            console.error('Error saving settings:', error);
+            alert('An error occurred while saving.');
+        } finally {
+            setSaving(false);
+        }
     };
+
+    if (loading) {
+        return <div className="p-8 text-center text-slate-500">Loading settings...</div>;
+    }
 
     return (
         <div className="p-8 space-y-8 font-display text-slate-900">

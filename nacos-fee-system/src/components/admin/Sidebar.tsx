@@ -53,10 +53,10 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
                     <img
                         alt="NACOS Logo"
                         className="w-10 h-10 object-contain"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZLaqHR992RUhjFYAKavXajPBLHSo58OYUyArFwJjpw_Bb8dUY0EwO8feVTXMPxi4NXkh53D0bMa9bl-8wBoVGS9N2VqnCi10JlZVftwPFUqE6Ars9vI1QCvMEArh8qCSg4KB6n1f5lhG01Ab3oicuvezjaYLDhgPycWkdvbA3IThpGXWvJAYM7bIoAWXTNVfHq0qpCZ-n_vY4r1lnr2WQxNXxciWe_pHFP6um-BpC1GTatBVCkGSq3w5M3kyxRNaznowSjW_4BFg"
+                        src="/images/nacos-logo.png"
                     />
                     <div>
-                        <h1 className="text-sm font-bold leading-tight text-primary">SACOETEC</h1>
+                        <h1 className="text-sm font-bold leading-tight text-primary">NACOS</h1>
                         <p className="text-[10px] text-slate-500 font-medium tracking-wider uppercase">Fee Clearance</p>
                     </div>
                 </div>

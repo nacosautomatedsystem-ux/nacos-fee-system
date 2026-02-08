@@ -37,7 +37,7 @@ export default function StudentSidebar({ isOpen, onClose }: SidebarProps) {
                     <img
                         alt="NACOS Logo"
                         className="w-10 h-10 object-contain"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD68oC07nxdBTV5mNfJR0xfFqLzWk0r0S3lWEsfjqIHSXZtCbIvzsHwlMs7RuGz3sR-oN2l3vknXml6dky4S3KJriM1KSSSOp4kgHm4Hg1UOGUtHeuIHfwrCzEQedszJjiAY_Jik-7cVT93pQqJuOXK2bPQtfjHTZtnTK6temApUKq0N0g0OAOjR0zFhVDBgwOUKgtG_1MDKZQTu1a34Z7w_rLjbCcU_9Y5lVeKfFTJqYGa4dQYYeh63BkzcGPnuezYQvCw4NJqda0"
+                        src="/images/nacos-logo.png"
                     />
                     <div>
                         <h1 className="font-bold text-sm leading-tight text-primary">NACOS</h1>

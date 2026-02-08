@@ -83,23 +83,6 @@ export default function StudentClearancePage() {
                 <div>
                     <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">Clearance Status</h2>
                 </div>
-                {data.student && (
-                    <div className="flex items-center gap-4">
-                        <button className="bg-white p-2.5 rounded-full shadow-sm border border-slate-200 hover:bg-slate-50 transition-colors relative">
-                            <span className="material-icons-round text-slate-500">notifications</span>
-                            <span className="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
-                        </button>
-                        <div className="flex items-center gap-3 bg-white pr-4 pl-2 py-2 rounded-full shadow-sm border border-slate-200">
-                            <div className="text-right hidden sm:block leading-tight">
-                                <p className="text-sm font-semibold text-slate-900">{data.student.fullName}</p>
-                                <p className="text-xs text-slate-500">{data.student.matricNumber}</p>
-                            </div>
-                            <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
-                                {data.student.fullName.charAt(0)}
-                            </div>
-                        </div>
-                    </div>
-                )}
             </header>
 
             {isCleared ? (
@@ -129,7 +112,7 @@ export default function StudentClearancePage() {
                             <img
                                 alt="NACOS Logo"
                                 className="w-24 h-24 mx-auto mb-6 object-contain"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAyopBYEjY2JWCS9Z1xfMQhVdY3VZeUklB1w3wTkaHnyynTkmlvMDjH1x2UN57myWX2Oj6sry1n_1KIQyaeb08COdUAlbwkiVzudDUhnhFcYj-ol0pb6j9qi4BeaQSGx924jnwIzcVi1NgGEnNJoK7OBkf39zPeB5-wiEp-ZhvqEVe7YnrqBrMlwfeUFWqwigJwNugz7p_W3tfRtGznunDRCIeIcJBzJ5zB-x3kdoRFsfb610BUDanHNHAdr9eqWqXd3x0Ddr4rMg"
+                                src="/images/nacos-logo.png"
                             />
                             <h3 className="text-primary font-bold tracking-widest text-sm uppercase mb-2">Nigeria Association of Computing Students</h3>
                             <h4 className="text-slate-600 font-medium text-lg mb-4">SACOETEC Chapter Higher Institution</h4>

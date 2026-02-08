@@ -161,10 +161,8 @@ export default function AdminDashboard() {
                     <h3 className="font-bold text-lg mb-6 text-slate-900">Clearance by Dept.</h3>
                     <div className="space-y-6">
                         {[
-                            { name: 'Computer Science', val: 88, color: 'bg-primary' },
-                            { name: 'Engineering', val: 62, color: 'bg-primary/70' },
-                            { name: 'Business Admin', val: 45, color: 'bg-primary/50' },
-                            { name: 'Applied Science', val: 30, color: 'bg-primary/30' }
+                            { name: 'Computer Science', val: 88, color: 'bg-primary' }
+                            
                         ].map(dept => (
                             <div key={dept.name}>
                                 <div className="flex justify-between text-sm mb-2 text-slate-700">

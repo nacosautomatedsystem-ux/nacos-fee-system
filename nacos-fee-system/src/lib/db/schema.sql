@@ -11,24 +11,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- ===========================================
 -- STUDENTS TABLE
 -- ===========================================
-CREATE TABLE IF NOT EXISTS students (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    full_name VARCHAR(255) NOT NULL,
-    matric_number VARCHAR(50) UNIQUE NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    department VARCHAR(100) NOT NULL,
-    level VARCHAR(20) NOT NULL,
-    email_verified BOOLEAN DEFAULT FALSE,
-    email_verification_token VARCHAR(255),
-    email_verification_expires TIMESTAMP WITH TIME ZONE,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
--- Index for faster lookups
-CREATE INDEX IF NOT EXISTS idx_students_email ON students(email);
-CREATE INDEX IF NOT EXISTS idx_students_matric ON students(matric_number);
-CREATE INDEX IF NOT EXISTS idx_students_verification_token ON students(email_verification_token);
+-- Moved to src/lib/db/schema/profiles.sql
 
 -- ===========================================
 -- ADMINS TABLE
@@ -88,19 +71,21 @@ CREATE INDEX IF NOT EXISTS idx_clearance_student ON clearance(student_id);
 CREATE INDEX IF NOT EXISTS idx_clearance_status ON clearance(status);
 
 -- ===========================================
+-- NOTIFICATIONS TABLE
+-- ===========================================
+-- Moved to src/lib/db/schema/notifications.sql
+
+-- ===========================================
 -- ROW LEVEL SECURITY (RLS) 
 -- ===========================================
 -- Enable RLS on all tables
-ALTER TABLE students ENABLE ROW LEVEL SECURITY;
+-- Note: students and notifications RLS policies are in their respective schema files.
 ALTER TABLE admins ENABLE ROW LEVEL SECURITY;
 ALTER TABLE fees ENABLE ROW LEVEL SECURITY;
 ALTER TABLE payments ENABLE ROW LEVEL SECURITY;
 ALTER TABLE clearance ENABLE ROW LEVEL SECURITY;
 
 -- Allow service role full access (for server-side operations)
--- Students table
-CREATE POLICY "Service role has full access to students" ON students
-    FOR ALL USING (auth.role() = 'service_role');
 
 -- Admins table
 CREATE POLICY "Service role has full access to admins" ON admins
@@ -121,6 +106,7 @@ CREATE POLICY "Service role has full access to payments" ON payments
 -- Clearance table
 CREATE POLICY "Service role has full access to clearance" ON clearance
     FOR ALL USING (auth.role() = 'service_role');
+
 
 -- ===========================================
 -- SAMPLE DATA (Optional - for testing)

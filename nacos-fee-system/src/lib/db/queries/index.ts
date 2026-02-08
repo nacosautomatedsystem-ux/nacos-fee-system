@@ -13,3 +13,9 @@ export { type Payment, type PaymentWithDetails } from './payments';
 
 export * as clearanceQueries from './clearance';
 export { type Clearance } from './clearance';
+
+export * as notificationQueries from './notifications';
+export { type Notification } from './notifications';
+
+export * as settingsQueries from './settings';
+export { type Setting } from './settings';
