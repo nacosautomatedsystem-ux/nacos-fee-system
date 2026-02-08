@@ -104,9 +104,9 @@ function LoginForm() {
                             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                         />
                     </div>
-                    {/* <div className="text-right mt-2">
-                        <a className="text-xs font-medium text-primary hover:underline" href="#">Forgot Password?</a>
-                    </div> */}
+                    <div className="text-right mt-2">
+                        <a className="text-xs font-medium text-primary hover:underline" href="https://nacos-fee-system-wadw.vercel.app/reset-password">Forgot Password?</a>
+                    </div>
                 </div>
 
                 <button
