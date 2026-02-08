@@ -195,3 +195,69 @@ export async function sendPaymentConfirmationEmail(
     html,
   });
 }
+/**
+ * Send password reset email
+ */
+export async function sendPasswordResetEmail(
+  email: string,
+  token: string
+): Promise<boolean> {
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://nacos-fee-system-wadw.vercel.app';
+  const resetLink = `${appUrl}/reset-password?token=${token}`;
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Reset Your Password</title>
+    </head>
+    <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f7fa;">
+      <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+        <div style="background: linear-gradient(135deg, #1a365d 0%, #2d4a7c 100%); padding: 30px; border-radius: 10px 10px 0 0; text-align: center;">
+          <h1 style="color: #ffffff; margin: 0; font-size: 24px;">SACOETEC NACOS</h1>
+          <p style="color: #e2e8f0; margin: 5px 0 0 0; font-size: 14px;">Fee Clearance System</p>
+        </div>
+        
+        <div style="background-color: #ffffff; padding: 40px 30px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+          <h2 style="color: #1a365d; margin-top: 0;">Reset Your Password</h2>
+          
+          <p style="color: #4a5568; line-height: 1.6;">
+            You requested a password reset. Please click the button below to set a new password:
+          </p>
+          
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="${resetLink}" style="display: inline-block; background-color: #3182ce; color: #ffffff; padding: 14px 30px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
+              Reset Password
+            </a>
+          </div>
+          
+          <p style="color: #718096; font-size: 14px; line-height: 1.6;">
+            If the button doesn't work, copy and paste this link into your browser:
+          </p>
+          <p style="color: #4299e1; font-size: 12px; word-break: break-all;">
+            ${resetLink}
+          </p>
+          
+          <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 30px 0;">
+          
+          <p style="color: #a0aec0; font-size: 12px; text-align: center;">
+            This link expires in 1 hour. If you didn't request a password reset, please ignore this email.
+          </p>
+        </div>
+        
+        <div style="text-align: center; padding: 20px; color: #718096; font-size: 12px;">
+          <p>&copy; ${new Date().getFullYear()} Sikiru Adetona College of Education, Science and Technology</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  return sendEmail({
+    to: email,
+    subject: 'Reset Your Password - NACOS Fee Clearance System',
+    html,
+  });
+}

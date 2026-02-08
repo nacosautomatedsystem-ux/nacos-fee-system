@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { findStudentByEmail, setResetToken } from '@/lib/db/queries/students';
+import { sendPasswordResetEmail } from '@/lib/auth/email';
 import crypto from 'crypto';
 
 // POST /api/auth/forgot-password
@@ -24,14 +25,16 @@ export async function POST(request: Request) {
         // Save token to DB
         await setResetToken(email, resetToken, resetExpires);
 
-        // In a real app, send email here.
-        // For development, we'll log the token or return it in development mode
-        console.log(`[DEV] Password Reset Token for ${email}: ${resetToken}`);
-        console.log(`[DEV] Reset Link: ${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/reset-password?token=${resetToken}`);
+        // Send email
+        const emailSent = await sendPasswordResetEmail(email, resetToken);
+
+        if (!emailSent) {
+            console.error('Failed to send reset email');
+            // We still return success to the user to avoid enumeration, but log the error
+        }
 
         return NextResponse.json({
             message: 'If an account exists, a reset link has been sent.',
-            // verified: true // un-comment for easy testing if needed, but risky for prod
         });
 
     } catch (error) {
