@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 function ResetPasswordForm() {
     const router = useRouter();
-    constsearchParams = useSearchParams();
+    const searchParams = useSearchParams();
     const token = searchParams.get('token');
 
     const [password, setPassword] = useState('');
