@@ -176,3 +176,43 @@ export async function updateStudent(id: string, data: Partial<Student>): Promise
     if (error) throw error;
     return updatedStudent;
 }
+// Password Reset Functions
+export async function setResetToken(email: string, token: string, expiresAt: Date): Promise<boolean> {
+    const { error } = await supabase.from('students')
+        .update({
+            reset_password_token: token,
+            reset_password_expires: expiresAt.toISOString(),
+        })
+        .eq('email', email.toLowerCase());
+
+    if (error) throw error;
+    return true;
+}
+
+export async function findStudentByResetToken(token: string): Promise<Student | null> {
+    // Check if token matches AND hasn't expired
+    const { data, error } = await supabase.from('students')
+        .select('*')
+        .eq('reset_password_token', token)
+        .gt('reset_password_expires', new Date().toISOString())
+        .single();
+
+    if (error) {
+        if (error.code === 'PGRST116') return null;
+        throw error;
+    }
+    return data;
+}
+
+export async function updateStudentPassword(studentId: string, passwordHash: string): Promise<boolean> {
+    const { error } = await supabase.from('students')
+        .update({
+            password_hash: passwordHash,
+            reset_password_token: null,
+            reset_password_expires: null,
+        })
+        .eq('id', studentId);
+
+    if (error) throw error;
+    return true;
+}

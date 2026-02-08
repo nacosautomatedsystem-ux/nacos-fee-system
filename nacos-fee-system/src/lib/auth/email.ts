@@ -41,7 +41,7 @@ export async function sendVerificationEmail(
   fullName: string,
   token: string
 ): Promise<boolean> {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://nacos-fee-system-wadw.vercel.app';
   const verificationLink = `${appUrl}/verify-email?token=${token}`;
 
   const html = `

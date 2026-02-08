@@ -12,6 +12,8 @@ CREATE TABLE IF NOT EXISTS students (
     email_verified BOOLEAN DEFAULT FALSE,
     email_verification_token VARCHAR(255),
     email_verification_expires TIMESTAMP WITH TIME ZONE,
+    reset_password_token VARCHAR(255),
+    reset_password_expires TIMESTAMP WITH TIME ZONE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
@@ -19,6 +21,7 @@ CREATE TABLE IF NOT EXISTS students (
 CREATE INDEX IF NOT EXISTS idx_students_email ON students(email);
 CREATE INDEX IF NOT EXISTS idx_students_matric ON students(matric_number);
 CREATE INDEX IF NOT EXISTS idx_students_verification_token ON students(email_verification_token);
+CREATE INDEX IF NOT EXISTS idx_students_reset_token ON students(reset_password_token);
 
 -- ===========================================
 -- RLS POLICIES FOR STUDENTS
