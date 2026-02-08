@@ -9,12 +9,14 @@ export async function POST(request: Request) {
         const { email } = await request.json();
 
         if (!email) {
+            console.log('API: Forgot Password - Email missing');
             return NextResponse.json({ error: 'Email is required' }, { status: 400 });
         }
 
+        console.log(`API: Forgot Password - Finding student: ${email}`);
         const student = await findStudentByEmail(email);
         if (!student) {
-            // For security, don't reveal if email exists or not
+            console.log('API: Forgot Password - Student not found');
             return NextResponse.json({ message: 'If an account exists, a reset link has been sent.' });
         }
 
@@ -22,8 +24,12 @@ export async function POST(request: Request) {
         const resetToken = crypto.randomBytes(32).toString('hex');
         const resetExpires = new Date(Date.now() + 3600000); // 1 hour from now
 
+        console.log('API: Forgot Password - Saving token to DB...');
         // Save token to DB
         await setResetToken(email, resetToken, resetExpires);
+        console.log('API: Forgot Password - Token saved.');
+
+        console.log('API: Forgot Password - Sending email...');
 
         // Send email
         const emailSent = await sendPasswordResetEmail(email, resetToken);
