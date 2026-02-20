@@ -1,6 +1,7 @@
 'use client';
 
 import { Suspense, useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
 interface Student {
@@ -32,6 +33,23 @@ function PaymentsContent() {
     const [loading, setLoading] = useState(true);
     const [student, setStudent] = useState<Student | null>(null);
     const [payingFee, setPayingFee] = useState<string | null>(null);
+    const searchParams = useSearchParams();
+    const [feedback, setFeedback] = useState<{ type: 'success' | 'error', message: string } | null>(null);
+
+    useEffect(() => {
+        const status = searchParams.get('status');
+        const error = searchParams.get('error');
+
+        if (status === 'success') {
+            setFeedback({ type: 'success', message: 'Payment successful! Your clearance status has been updated.' });
+        } else if (error) {
+            let message = 'Payment failed. Please try again.';
+            if (error === 'invalid_reference') message = 'Invalid payment reference.';
+            if (error === 'payment_not_found') message = 'Payment record not found.';
+            if (error === 'verification_failed') message = 'Payment verification failed.';
+            setFeedback({ type: 'error', message });
+        }
+    }, [searchParams]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -113,6 +131,19 @@ function PaymentsContent() {
                     <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">Fee Payment & History</h2>
                 </div>
             </header>
+
+            {feedback && (
+                <div className={`mb-8 p-4 rounded-xl flex items-center gap-3 animate-in fade-in slide-in-from-top-4 duration-300 ${feedback.type === 'success' ? 'bg-green-100 text-green-800 border border-green-200' : 'bg-red-100 text-red-800 border border-red-200'
+                    }`}>
+                    <span className="material-icons-round">
+                        {feedback.type === 'success' ? 'check_circle' : 'error'}
+                    </span>
+                    <p className="font-semibold">{feedback.message}</p>
+                    <button onClick={() => setFeedback(null)} className="ml-auto opacity-50 hover:opacity-100 transition-opacity">
+                        <span className="material-icons-round">close</span>
+                    </button>
+                </div>
+            )}
 
             <div className="space-y-8">
                 {/* Pending Fees Section */}
@@ -285,10 +316,6 @@ function PaymentsContent() {
                 </div>
             </div>
 
-            <footer className="mt-12 py-8 text-center text-slate-500 text-sm border-t border-slate-200">
-                <p>© 2026 NACOS SACOETEC Chapter. All Rights Reserved.</p>
-                <p className="mt-1">Automated Fee Clearance System v1.0</p>
-            </footer>
         </div>
     );
 }

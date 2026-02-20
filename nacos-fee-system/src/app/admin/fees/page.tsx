@@ -25,6 +25,7 @@ export default function AdminFeesPage() {
         description: ''
     });
     const [saving, setSaving] = useState(false);
+    const [totalRevenue, setTotalRevenue] = useState(0);
 
     const fetchFees = async () => {
         try {
@@ -32,6 +33,7 @@ export default function AdminFeesPage() {
             const data = await response.json();
             if (response.ok && data.fees) {
                 setFees(data.fees);
+                setTotalRevenue(data.totalRevenue || 0);
             } else {
                 setFees([]);
             }
@@ -113,8 +115,6 @@ export default function AdminFeesPage() {
     // Real stats
     const totalFees = fees.length;
     const activeSession = "2025/2026";
-    // Revenue is harder to calculate without payments, setting to 0 or removing mock
-    const totalRevenue = 0;
 
     return (
         <div className="p-8 space-y-8 font-display text-slate-900">

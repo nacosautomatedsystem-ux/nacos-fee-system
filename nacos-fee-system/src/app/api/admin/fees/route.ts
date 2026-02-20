@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth/session';
-import { feeQueries } from '@/lib/db/queries';
+import { feeQueries, paymentQueries } from '@/lib/db/queries';
 
 export async function GET() {
     try {
@@ -15,9 +15,11 @@ export async function GET() {
 
 
         const fees = await feeQueries.getActiveFees();
+        const totalRevenue = await paymentQueries.getTotalRevenue();
 
         return NextResponse.json({
             fees,
+            totalRevenue,
         });
     } catch (error) {
         console.error('Admin fees error:', error);

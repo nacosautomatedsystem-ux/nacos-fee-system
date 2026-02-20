@@ -162,7 +162,7 @@ export default function AdminDashboard() {
                     <div className="space-y-6">
                         {[
                             { name: 'Computer Science', val: 88, color: 'bg-primary' }
-                            
+
                         ].map(dept => (
                             <div key={dept.name}>
                                 <div className="flex justify-between text-sm mb-2 text-slate-700">
@@ -238,9 +238,6 @@ export default function AdminDashboard() {
                 </div>
             </div>
 
-            <footer className="p-8 text-center text-slate-400 text-xs">
-                © {new Date().getFullYear()} SACOETEC NACOS Fee Clearance System. All rights reserved.
-            </footer>
         </div>
     );
 }

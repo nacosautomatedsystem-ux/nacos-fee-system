@@ -145,10 +145,18 @@ export async function searchStudents(search?: string, status?: string): Promise<
     if (error) throw error;
 
     // Transform the data to include clearance_status
-    let students = (data || []).map((student: Student & { clearance?: { status: string } | null }) => ({
-        ...student,
-        clearance_status: student.clearance?.status || 'uncleared',
-    }));
+    let students = (data || []).map((student: Student & { clearance?: any }) => {
+        let status = 'uncleared';
+        if (student.clearance) {
+            status = Array.isArray(student.clearance)
+                ? (student.clearance[0]?.status || 'uncleared')
+                : (student.clearance.status || 'uncleared');
+        }
+        return {
+            ...student,
+            clearance_status: status,
+        };
+    });
 
     // Filter by status if provided
     if (status) {

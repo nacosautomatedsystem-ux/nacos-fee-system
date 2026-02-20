@@ -89,7 +89,7 @@ export default function StudentDashboard() {
                             : 'Your NACOS fee clearance for the 2025/2026 academic session is still pending. Please settle all outstanding payments to generate your clearance certificate.'}
                     </p>
                     {data.clearanceStatus === 'uncleared' && (
-                        <Link href="/student/fees" className="inline-flex mt-6 bg-primary text-white px-8 py-3.5 rounded-xl font-bold shadow-lg shadow-primary/30 hover:bg-green-700 transition-all transform hover:-translate-y-0.5">
+                        <Link href="/student/fee" className="inline-flex mt-6 bg-primary text-white px-8 py-3.5 rounded-xl font-bold shadow-lg shadow-primary/30 hover:bg-green-700 transition-all transform hover:-translate-y-0.5">
                             Settle Fees Now
                         </Link>
                     )}
@@ -192,10 +192,6 @@ export default function StudentDashboard() {
                     )}
                 </div>
             </div>
-            <footer className="mt-12 py-8 text-center text-slate-500 text-sm border-t border-slate-200">
-                <p>© 2026 NACOS SACOETEC Chapter. All Rights Reserved.</p>
-                <p className="mt-1">Automated Fee Clearance System v1.0</p>
-            </footer>
         </div>
     );
 }

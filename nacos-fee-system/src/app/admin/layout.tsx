@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import AdminSidebar from '@/components/admin/Sidebar';
+import Footer from '@/components/Footer';
 
 export default function AdminLayout({
     children,
@@ -85,6 +86,7 @@ export default function AdminLayout({
                 <main className="flex-1 overflow-y-auto">
                     {children}
                 </main>
+                <Footer />
             </div>
         </div>
     );

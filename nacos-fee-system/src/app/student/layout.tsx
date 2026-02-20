@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import StudentSidebar from '@/components/student/Sidebar';
+import Footer from '@/components/Footer';
 
 interface StudentData {
     fullName: string;
@@ -97,6 +98,7 @@ export default function StudentLayout({
                 <main className="flex-1 p-4 md:p-8">
                     {children}
                 </main>
+                <Footer />
             </div>
         </div>
     );

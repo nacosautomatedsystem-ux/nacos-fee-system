@@ -29,7 +29,7 @@ export async function GET() {
                 successfulPayments: paymentStats.successCount,
                 pendingPayments: paymentStats.pendingCount,
                 clearedCount: clearanceStats.clearedCount,
-                unclearedCount: clearanceStats.unclearedCount,
+                unclearedCount: totalStudents - clearanceStats.clearedCount,
             },
             recentPayments,
         });

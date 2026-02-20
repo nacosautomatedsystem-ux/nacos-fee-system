@@ -9,22 +9,22 @@ export async function GET(request: NextRequest) {
         const reference = searchParams.get('reference');
 
         if (!reference) {
-            return NextResponse.redirect(new URL('/student/fees?error=invalid_reference', request.url));
+            return NextResponse.redirect(new URL('/student/fee?error=invalid_reference', request.url));
         }
 
         // Get payment record
         const payment = await paymentQueries.getPaymentByReference(reference);
         if (!payment) {
-            return NextResponse.redirect(new URL('/student/fees?error=payment_not_found', request.url));
+            return NextResponse.redirect(new URL('/student/fee?error=payment_not_found', request.url));
         }
 
         // If already processed, redirect to appropriate page
         if (payment.status === 'success') {
-            return NextResponse.redirect(new URL('/student/payments?status=success', request.url));
+            return NextResponse.redirect(new URL('/student/fee?status=success', request.url));
         }
 
         if (payment.status === 'failed') {
-            return NextResponse.redirect(new URL('/student/fees?error=payment_failed', request.url));
+            return NextResponse.redirect(new URL('/student/fee?error=payment_failed', request.url));
         }
 
         // Verify with Paystack
@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
 
         if (!verification || !verification.status) {
             await paymentQueries.updatePaymentStatus(reference, 'failed');
-            return NextResponse.redirect(new URL('/student/fees?error=verification_failed', request.url));
+            return NextResponse.redirect(new URL('/student/fee?error=verification_failed', request.url));
         }
 
         if (verification.data.status === 'success') {
@@ -56,13 +56,13 @@ export async function GET(request: NextRequest) {
                 );
             }
 
-            return NextResponse.redirect(new URL('/student/payments?status=success', request.url));
+            return NextResponse.redirect(new URL('/student/fee?status=success', request.url));
         } else {
             await paymentQueries.updatePaymentStatus(reference, 'failed');
-            return NextResponse.redirect(new URL('/student/fees?error=payment_failed', request.url));
+            return NextResponse.redirect(new URL('/student/fee?error=payment_failed', request.url));
         }
     } catch (error) {
         console.error('Payment verification error:', error);
-        return NextResponse.redirect(new URL('/student/fees?error=verification_error', request.url));
+        return NextResponse.redirect(new URL('/student/fee?error=verification_error', request.url));
     }
 }

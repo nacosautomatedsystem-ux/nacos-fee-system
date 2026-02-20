@@ -1,4 +1,5 @@
 'use client';
+import Footer from '@/components/Footer';
 
 export default function AuthLayout({
     children,
@@ -30,15 +31,7 @@ export default function AuthLayout({
                 </div>
             </main>
 
-            <footer className="py-8 px-6 text-center text-slate-500 text-sm bg-background-light">
-                <p>© 2026 SACOETEC Computing Department. All Rights Reserved.</p>
-                <p>Built by <a href="uplix.vercel.app">UPLIX</a></p>
-                <div className="mt-2 flex justify-center space-x-6">
-                    <a className="hover:text-primary transition-colors" href="#">Privacy Policy</a>
-                    <a className="hover:text-primary transition-colors" href="#">Terms of Service</a>
-                    <a className="hover:text-primary transition-colors" href="#">Help Center</a>
-                </div>
-            </footer>
+            <Footer />
         </>
     );
 }
