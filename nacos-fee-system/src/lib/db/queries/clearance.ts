@@ -83,6 +83,36 @@ export async function setClearanceCleared(studentId: string): Promise<Clearance 
     return updateClearanceStatus(studentId, 'cleared');
 }
 
+export async function getClearanceById(id: string): Promise<(Clearance & {
+    student_name: string;
+    student_matric: string;
+    student_department: string;
+    student_level: string;
+}) | null> {
+    const { data, error } = await supabase.from('clearance')
+        .select(`
+      *,
+      students(full_name, matric_number, department, level)
+    `)
+        .eq('id', id)
+        .single();
+
+    if (error) {
+        if (error.code === 'PGRST116') return null;
+        throw error;
+    }
+
+    if (!data) return null;
+
+    return {
+        ...data,
+        student_name: data.students?.full_name || 'Unknown',
+        student_matric: data.students?.matric_number || 'Unknown',
+        student_department: data.students?.department || 'Unknown',
+        student_level: data.students?.level || 'Unknown',
+    };
+}
+
 export async function getAllClearances(): Promise<(Clearance & {
     student_name: string;
     student_matric: string;

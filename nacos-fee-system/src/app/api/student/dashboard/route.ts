@@ -26,6 +26,7 @@ export async function GET() {
         // Get clearance status
         const clearance = await clearanceQueries.getClearanceByStudentId(student.id);
         const clearanceStatus = clearance?.status || 'uncleared';
+        const clearanceId = clearance?.id || null;
 
         // Get payments
         const payments = await paymentQueries.getPaymentsByStudentId(student.id);
@@ -55,6 +56,7 @@ export async function GET() {
                 level: student.level,
             },
             clearanceStatus,
+            clearanceId,
             summary: {
                 totalPaid,
                 totalOutstanding,

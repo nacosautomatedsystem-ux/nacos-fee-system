@@ -10,6 +10,7 @@ interface ClearanceData {
         level: string;
     };
     clearance: {
+        id: string | null;
         status: 'cleared' | 'uncleared';
         updatedAt: string;
     };
@@ -28,8 +29,9 @@ export default function StudentClearancePage() {
                     setData({
                         student: result.student,
                         clearance: {
+                            id: result.clearanceId,
                             status: result.clearanceStatus,
-                            updatedAt: new Date().toISOString() // Mock update time for now or fetch from DB if needed
+                            updatedAt: new Date().toISOString()
                         }
                     });
                 }
@@ -142,9 +144,9 @@ export default function StudentClearancePage() {
                                     <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Session</label>
                                     <p className="text-lg font-semibold">2025/2026 Academic Session</p>
                                 </div>
-                                <div>
+                                 <div>
                                     <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Verification Code</label>
-                                    <p className="text-lg font-semibold font-mono text-primary">NAC-{data.student.matricNumber.slice(-4)}-SACO</p>
+                                    <p className="text-lg font-semibold font-mono text-primary truncate max-w-[200px]">{data.clearance.id || `NAC-${data.student.matricNumber.slice(-4)}-SACO`}</p>
                                 </div>
                             </div>
                             <p className="mt-12 text-slate-600 leading-relaxed">
@@ -163,10 +165,20 @@ export default function StudentClearancePage() {
                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXI9aAUP5LcBGDfurqqo6ollsnGWsFhHEeINMP-6taQBVrtCWyq1tz6CePSVNln7aiydKgwfSskt_MeVKoNe7CWDcr2GWdE-b6XWQ9k94znQ1ompHABkR5Q7pwd0x59OYycrRzgg3tURljRyO9Y1tTZjKnkx3a1LbmXs2gRen5Pm8PJdjRFfcIxr8EYu9m-Y5CN-yQ1kdh4EscVtZN7dUZ5xZ5viyPSEJkUtdS_nIivMCBrAeAlpUibnoPaJvBqOUL6W1PGD8rac4"
                                     />
                                 </div>
-                                <p className="font-bold text-slate-800">Prof. Ibrahim K. Musa</p>
-                                <p className="text-xs text-slate-500 uppercase tracking-widest">Departmental Head</p>
+                                <p className="font-bold text-slate-800">Mr Samuel</p>
+                                <p className="text-xs text-slate-500 uppercase tracking-widest">H.O.D of Computer Science Department</p>
                             </div>
-                            <div className="flex flex-col items-center">
+                             <div className="flex flex-col items-center gap-4">
+                                {data.clearance.id && (
+                                    <div className="bg-white p-2 border-2 border-slate-100 rounded-lg shadow-sm">
+                                        <img 
+                                            src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(`${window.location.origin}/verify/clearance/${data.clearance.id}`)}`}
+                                            alt="Verification QR Code"
+                                            className="w-24 h-24"
+                                        />
+                                        <p className="text-[8px] text-center text-slate-400 mt-1 uppercase font-bold tracking-tighter">Scan to Verify</p>
+                                    </div>
+                                )}
                                 <div className="relative w-32 h-32 flex items-center justify-center">
                                     <div className="absolute inset-0 border-2 border-primary/40 border-dashed rounded-full animate-spin-slow"></div>
                                     <img

@@ -55,7 +55,7 @@ export default function AdminReportsPage() {
             const students = studentsData.students || [];
             const payments = paymentsData.payments || [];
 
-            const clearedStudents = students.filter((s: any) => s.clearance_status === 'cleared');
+            const clearedStudents = students.filter((s: any) => s.clearanceStatus === 'cleared');
             const successfulPayments = payments.filter((p: any) => p.status === 'success');
 
             const totalRevenue = successfulPayments.reduce((sum: number, p: any) => sum + Number(p.amount), 0);
@@ -85,7 +85,7 @@ export default function AdminReportsPage() {
                 }
                 const deptData = deptMap.get(dept);
                 deptData.students++;
-                if (student.clearance_status === 'cleared') {
+                if (student.clearanceStatus === 'cleared') {
                     deptData.cleared++;
                 }
             });
@@ -259,8 +259,8 @@ export default function AdminReportsPage() {
                                 key={tab}
                                 onClick={() => setSelectedReport(tab)}
                                 className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${selectedReport === tab
-                                        ? 'bg-primary text-white shadow-sm'
-                                        : 'text-slate-600 hover:bg-white hover:text-slate-900'
+                                    ? 'bg-primary text-white shadow-sm'
+                                    : 'text-slate-600 hover:bg-white hover:text-slate-900'
                                     }`}
                             >
                                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
